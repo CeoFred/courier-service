@@ -2,7 +2,6 @@
 session_start();
 $name = $_SESSION['first_name'];
 $tracking_id = isset($_GET['tracking_id']) ? $_GET['tracking_id'] : null;
-
 $admin = isset($_SESSION['admin_id']) ? $_SESSION['admin_id'] : null;
 
 if(is_null($admin)){
@@ -27,9 +26,10 @@ if(is_null($tracking_id)){
 }
 
 $query = $courier->search($tracking_id);
-$tracking_data = isset($query->fetchAll(PDO::FETCH_ASSOC)[0]) ? $query->fetchAll(PDO::FETCH_ASSOC)[0] : null;
 
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
 
+$tracking_data = isset($res) ? $res[0] : null;
 if(!$tracking_data){
     die('Nothing Found!');
 }

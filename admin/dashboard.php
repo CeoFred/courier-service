@@ -2,11 +2,26 @@
 session_start();
 
 if(!isset($_SESSION['codemon_authenticated'])){
-    header('Location:pages/login.php');
+    header('Location:pages/login.php?no_auth=true');
     die();
 }
 
 $name = $_SESSION['first_name'];
+
+// get database connection
+include_once '../api/config/db.php';
+
+// instantiate courier object
+include_once '../api/core/index.php';
+
+$database = new Database();
+$db = $database->getConnection();
+
+$courier = new Courier($db);
+
+$query = $courier->read();
+
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -151,9 +166,9 @@ Admin Dashboard
               <li >
 
                   
-                    <a href="charts.html">
+                    <a href="./pages/logout.php">
                       
-                        <i class="now-ui-icons business_chart-pie-36"></i>
+                        <i class="now-ui-icons objects_key-25"></i>
                       
                       <p>Logout</p>
                     </a>
@@ -194,17 +209,7 @@ Admin Dashboard
 
 	    <div class="collapse navbar-collapse justify-content-end" id="navigation">
       
-        
-          <form>
-    <div class="input-group no-border">
-        <input type="text" value="" class="form-control" placeholder="Search...">
-        <div class="input-group-append">
-         <div class="input-group-text">
-           <i class="now-ui-icons ui-1_zoom-bold"></i>
-         </div>
-       </div>
-    </div>
-</form>
+       
 
 <ul class="navbar-nav">
 
@@ -266,7 +271,7 @@ Admin Dashboard
                                 <div class="icon icon-primary">
                                     <i class="now-ui-icons ui-2_chat-round"></i>
                                 </div>
-                                <h3 class="info-title">10</h3>
+                                <h3 class="info-title"><?=count($res)?></h3>
                                 <h6 class="stats-title">Couriers</h6>
                             </div>
                         </div>

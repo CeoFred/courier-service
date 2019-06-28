@@ -2,7 +2,7 @@
 session_start();
 
 $name= $_SESSION['first_name'];
-
+var_dump($_SESSION);
 ?>
 
 <!DOCTYPE html>

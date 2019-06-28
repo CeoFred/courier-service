@@ -39,8 +39,8 @@ $p = extract($tracking_data);
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <head>
  <meta charset="utf-8" />
-<link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-<link rel="icon" type="image/png" href="../assets/img/favicon.png">
+<!-- <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+<link rel="icon" type="image/png" href="../assets/img/favicon.png"> -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 <title>Update Courier</title>
@@ -223,6 +223,14 @@ $p = extract($tracking_data);
     </div>
     
     <div class="card-body ">
+    <div id="error_messages" style="color:red;font-size:20px">
+
+</div>
+
+<div id="success_messages" style="color:teal">
+
+</div>
+
         
                                 <label>Number of Items In Package</label>
                                 <div class="form-group">
@@ -296,13 +304,6 @@ $p = extract($tracking_data);
     
 </div>
 
-<div id="error_messages" style="color:red;font-size:20px">
-
-</div>
-
-<div id="success_messages" style="color:teal">
-
-</div>
 
 <div class="card-footer ">
         <button type="submit" class="btn btn-fill btn-rounded btn-primary" id="create_co">create</button>
@@ -363,11 +364,10 @@ function createCourier(){
 for (const key in data) {
     if (data.hasOwnProperty(key)) {
         const element = data[key];
-        console.log(element)
         if(element.trim().length <= 0){
             window.scrollTo(0,0)
           messageContainer.innerHTML = `${key} was left empty`
-            console.log(`${key} was left empty`)
+            console.error(`${key} was left empty`)
     courier_btn.innerHTML= 'create'
 
             return false;
@@ -397,8 +397,9 @@ $.ajax({
 {
     if(res.status === 'failed'){
       messageContainer.innerHTML = res.message
-        console.log(res.message)
     }else  if(res.status_code == 200){
+        window.scrollTo(0,0)
+
      courier_btn.innerHTML= 'Great!..'
      successContainer.innerText = 'Courier Successfully Updated,please wait..'
 
@@ -409,238 +410,20 @@ $.ajax({
 
     }
 
-    console.log(res)
     }
 
 ).catch(err =>
 {
-console.log(err)
-messageContainer.innerHTML = err.JSONResponse.message
+    window.scrollTo(0,0)
+
+    console.log(err)
+messageContainer.innerHTML = err.responseJSON.message
 courier_btn.innerHTML= 'Try again.'
 
 })
 }
 
 
-</script>
-<script src="../assets/js/core/bootstrap.min.js" ></script>
-
-
-<script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js" ></script>
-
-<script src="../assets/js/plugins/moment.min.js"></script>
-
-
-
-<!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
-<script src="../assets/js/plugins/bootstrap-switch.js"></script>
-
-<!--  Plugin for Sweet Alert -->
-<script src="../assets/js/plugins/sweetalert2.min.js"></script>
-
-<!-- Forms Validations Plugin -->
-<script src="../assets/js/plugins/jquery.validate.min.js"></script>
-
-<!--  Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
-<script src="../assets/js/plugins/jquery.bootstrap-wizard.js"></script>
-
-<!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
-<script src="../assets/js/plugins/bootstrap-selectpicker.js" ></script>
-
-<!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
-<script src="../assets/js/plugins/bootstrap-datetimepicker.js"></script>
-
-<!--  DataTables.net Plugin, full documentation here: https://datatables.net/    -->
-<script src="../assets/js/plugins/jquery.dataTables.min.js"></script>
-
-<!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
-<script src="../assets/js/plugins/bootstrap-tagsinput.js"></script>
-
-<!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
-<script src="../assets/js/plugins/jasny-bootstrap.min.js"></script>
-
-<!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
-<script src="../assets/js/plugins/fullcalendar.min.js"></script>
-
-<!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
-<script src="../assets/js/plugins/jquery-jvectormap.js"></script>
-
-<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-<script src="../assets/js/plugins/nouislider.min.js" ></script>
-
-
-<!--  Google Maps Plugin    -->
-
-<script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGat1sgDZ-3y6fFe6HD7QUziVC6jlJNog"></script>
-
-<!-- Place this tag in your head or just before your close body tag. -->
-<script async defer src="../../../../buttons.github.io/buttons.js"></script>
-
-
-<!-- Chart JS -->
-<script src="../assets/js/plugins/chartjs.min.js"></script>
-
-<!--  Notifications Plugin    -->
-<script src="../assets/js/plugins/bootstrap-notify.js"></script>
-
-
-
-<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc --><script src="../assets/js/now-ui-dashboard.min290d.js?v=1.4.1" type="text/javascript"></script><!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
-<script src="../assets/demo/demo.js"></script>
-
-
-  <!-- Sharrre libray -->
-<script src="../assets/demo/jquery.sharrre.js"></script>
-
-
-  <script>
-  $(document).ready(function(){
-    $().ready(function(){
-        $sidebar = $('.sidebar');
-        $sidebar_img_container = $sidebar.find('.sidebar-background');
-
-        $full_page = $('.full-page');
-
-        $sidebar_responsive = $('body > .navbar-collapse');
-        sidebar_mini_active = true;
-
-        window_width = $(window).width();
-
-        fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
-
-        // if( window_width > 767 && fixed_plugin_open == 'Dashboard' ){
-        //     if($('.fixed-plugin .dropdown').hasClass('show-dropdown')){
-        //         $('.fixed-plugin .dropdown').addClass('show');
-        //     }
-        //
-        // }
-
-        $('.fixed-plugin a').click(function(event){
-          // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
-            if($(this).hasClass('switch-trigger')){
-                if(event.stopPropagation){
-                    event.stopPropagation();
-                }
-                else if(window.event){
-                   window.event.cancelBubble = true;
-                }
-            }
-        });
-
-        $('.fixed-plugin .background-color span').click(function(){
-            $(this).siblings().removeClass('active');
-            $(this).addClass('active');
-
-            var new_color = $(this).data('color');
-
-            if($sidebar.length != 0){
-                $sidebar.attr('data-color',new_color);
-            }
-
-            if($full_page.length != 0){
-                $full_page.attr('filter-color',new_color);
-            }
-
-            if($sidebar_responsive.length != 0){
-                $sidebar_responsive.attr('data-color',new_color);
-            }
-        });
-
-        $('.fixed-plugin .img-holder').click(function(){
-            $full_page_background = $('.full-page-background');
-
-            $(this).parent('li').siblings().removeClass('active');
-            $(this).parent('li').addClass('active');
-
-
-            var new_image = $(this).find("img").attr('src');
-
-            if( $sidebar_img_container.length !=0 && $('.switch-sidebar-image input:checked').length != 0 ){
-                $sidebar_img_container.fadeOut('fast', function(){
-                   $sidebar_img_container.css('background-image','url("' + new_image + '")');
-                   $sidebar_img_container.fadeIn('fast');
-                });
-            }
-
-            if($full_page_background.length != 0 && $('.switch-sidebar-image input:checked').length != 0 ) {
-                var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
-
-                $full_page_background.fadeOut('fast', function(){
-                   $full_page_background.css('background-image','url("' + new_image_full_page + '")');
-                   $full_page_background.fadeIn('fast');
-                });
-            }
-
-            if( $('.switch-sidebar-image input:checked').length == 0 ){
-                var new_image = $('.fixed-plugin li.active .img-holder').find("img").attr('src');
-                var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
-
-                $sidebar_img_container.css('background-image','url("' + new_image + '")');
-                $full_page_background.css('background-image','url("' + new_image_full_page + '")');
-            }
-
-            if($sidebar_responsive.length != 0){
-                $sidebar_responsive.css('background-image','url("' + new_image + '")');
-            }
-        });
-
-        $('.switch-sidebar-image input').on("switchChange.bootstrapSwitch", function(){
-            $full_page_background = $('.full-page-background');
-
-            $input = $(this);
-
-            if($input.is(':checked')){
-                if($sidebar_img_container.length != 0){
-                    $sidebar_img_container.fadeIn('fast');
-                    $sidebar.attr('data-image','#');
-                }
-
-                if($full_page_background.length != 0){
-                    $full_page_background.fadeIn('fast');
-                    $full_page.attr('data-image','#');
-                }
-
-                background_image = true;
-            } else {
-                if($sidebar_img_container.length != 0){
-                    $sidebar.removeAttr('data-image');
-                    $sidebar_img_container.fadeOut('fast');
-                }
-
-                if($full_page_background.length != 0){
-                    $full_page.removeAttr('data-image','#');
-                    $full_page_background.fadeOut('fast');
-                }
-
-                background_image = false;
-            }
-        });
-
-        $('.switch-sidebar-mini input').on("switchChange.bootstrapSwitch", function(){
-          var $btn = $(this);
-
-          if(sidebar_mini_active == true){
-              $('body').removeClass('sidebar-mini');
-              sidebar_mini_active = false;
-              nowuiDashboard.showSidebarMessage('Sidebar mini deactivated...');
-          }else{
-              $('body').addClass('sidebar-mini');
-              sidebar_mini_active = true;
-              nowuiDashboard.showSidebarMessage('Sidebar mini activated...');
-          }
-
-          // we simulate the window Resize so the charts will get updated in realtime.
-          var simulateWindowResize = setInterval(function(){
-              window.dispatchEvent(new Event('resize'));
-          },180);
-
-          // we stop the simulation of Window Resize after the animations are completed
-          setTimeout(function(){
-              clearInterval(simulateWindowResize);
-          },1000);
-        });
-    });
-  });
 </script>
     </body>
 </html>

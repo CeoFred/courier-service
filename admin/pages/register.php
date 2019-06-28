@@ -88,27 +88,8 @@
 </nav>
 <!-- End Navbar -->
 
-        
-
         <div class="wrapper wrapper-full-page ">
-          
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="full-page register-page section-image" filter-color="black" data-image="../../assets/img/bg16.jpg">
+<div class="full-page register-page section-image" filter-color="black" data-image="../assets/img/bg14.jpg">
     <div class="content">
         <div class="container">
             <div class="row">
@@ -234,7 +215,7 @@
     <div class=" container-fluid ">
        
         <div class="copyright" id="copyright">
-            &copy; <script>document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))</script>, Designed by <a href="https://www.invisionapp.com/" target="_blank">Invision</a>. Coded by <a href="https://www.codemon.co/" target="_blank">Codemon</a>.
+            &copy; <script>document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))</script>, Designed & Coded by <a href="https://www.twitter.com/codemon_" target="_blank">Codemon</a>.
         </div>
     </div>
     
@@ -307,7 +288,7 @@ $.ajax({
       messageContainer.innerHTML = res.message
         console.log(res.message)
     }else  if(res.status_code == 200){
-        window.location.href = 'http://localhost:4040/admin/pages/login.html?reg=true&t=4242045958761391661397653'
+        window.location.href = 'http://localhost:4040/admin/pages/login.php?reg=true&t=4242045958761391661397653'
      submit_button.innerHTML= 'Great!..'
      successContainer.innerText = res.message
 

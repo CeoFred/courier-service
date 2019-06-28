@@ -1,5 +1,4 @@
 <?php
-// session_start();
 require 'Base.php';
 
 class Courier extends Base {
@@ -178,14 +177,15 @@ class Courier extends Base {
                 comments=:comments,
                 package_carrier=:package_carrier,
                 package_weight=:package_weight,
-                payment_mode=:payment_mode,
-                pick_up_date=:pick_up_date,
+                shipment_mode=:shipment_mode,
                 updated_at=:updated_at,
+                items_specified=:items_specified,
+                payment_mode=:payment_mode,
                 departure_time=:departure_time,
                 departure_date=:departure_date,
-                shipment_mode=:shipment_mode,
-                items_specified=:items_specified,
-                expected_delivery_date:=expected_delivery_date
+                pick_up_date=:pick_up_date,
+                pick_up_time=:pick_up_time,
+                expected_delivery_date=:expected_delivery_date
                 
                  WHERE
                 tracking_id =:tracking_id AND package_status =:status";
@@ -196,20 +196,23 @@ class Courier extends Base {
     // sanitize
     $this->no_of_pakages = htmlspecialchars(strip_tags($this->no_of_pakages));
     $this->package_destination = htmlspecialchars(strip_tags($this->package_destination));
+    $this->comments = htmlspecialchars(strip_tags($this->comments)); 
     $this->package_carrier = htmlspecialchars(strip_tags($this->package_carrier));
     $this->package_weight = htmlspecialchars(strip_tags($this->package_weight));
-    $this->shipment_mode = htmlspecialchars(strip_tags($this->shipment_mode));
+    $this->tracking_id = htmlspecialchars(strip_tags($this->tracking_id));
+    $this->status = 1;
+  
+  
+    $this->shipment_mode = htmlspecialchars(strip_tags($this->shipment_mode)); 
     $this->updated_at = htmlspecialchars(strip_tags($this->updated_at));
     $this->items_specified = htmlspecialchars(strip_tags($this->items_specified));
     $this->payment_mode = htmlspecialchars(strip_tags($this->payment_mode));
     $this->departure_time = htmlspecialchars(strip_tags($this->departure_time));
-    $this->pick_up_date = htmlspecialchars(strip_tags($this->pick_up_date));
-    $this->tracking_id = htmlspecialchars(strip_tags($this->tracking_id));
-    $this->pick_up_time =htmlspecialchars(strip_tags($this->pick_up_time));
-    $this->comments = htmlspecialchars(strip_tags($this->comments));
     $this->departure_date = htmlspecialchars(strip_tags($this->departure_date));
+
+    $this->pick_up_date = htmlspecialchars(strip_tags($this->pick_up_date));
+    $this->pick_up_time =htmlspecialchars(strip_tags($this->pick_up_time));
     $this->expected_delivery_date = htmlspecialchars(strip_tags($this->expected_delivery_date));
-    $this->status = 1;
 
 
     // bind new values
@@ -217,17 +220,22 @@ class Courier extends Base {
     $stmt->bindParam(':package_destination', $this->package_destination);
     $stmt->bindParam(':package_carrier', $this->package_carrier);
     $stmt->bindParam(':package_weight', $this->package_weight);
+    $stmt->bindParam(':comments',$this->comments);
+    $stmt->bindParam(':status', $this->status);
+    $stmt->bindParam(':tracking_id', $this->tracking_id);
+
+
     $stmt->bindParam(':payment_mode', $this->payment_mode);
-    $stmt->bindParam(':pick_up_date', $this->pick_up_date);
     $stmt->bindParam(':departure_time', $this->departure_time);
     $stmt->bindParam(':shipment_mode', $this->shipment_mode);
     $stmt->bindParam(':updated_at', $this->updated_at);
     $stmt->bindParam(':items_specified', $this->items_specified);
-    $stmt->bindParam(':status', $this->status);
-    $stmt->bindParam(':tracking_id', $this->tracking_id);
     $stmt->bindParam(':departure_date',$this->departure_date);
-    $stmt->bindParam(':comments',$this->comments);
+
+    $stmt->bindParam(':pick_up_date', $this->pick_up_date);
+    $stmt->bindParam(':pick_up_time', $this->pick_up_time);
     $stmt->bindParam(':expected_delivery_date',$this->expected_delivery_date);
+
     // execute the query
     if ($stmt->execute()) {
       return true;
@@ -443,23 +451,24 @@ class Courier extends Base {
             FROM
                 " . $this->table_name . "
             WHERE
-            tracking_id = ? AND package_status = ?";
+            tracking_id = ?";
 
     // prepare query statement
     $stmt = $this->conn->prepare($query);
 
     // sanitize
-    $tracking_id = htmlspecialchars(strip_tags($tracking_id));
+    $tracking_id = '131561763684';
     
     // bind
     $stmt->bindParam(1, $tracking_id);
-    $stmt->bindParam(2, $this->active_status);
+    // $stmt->bindParam(2, $this->active_status);
 
 
     // execute query
-    $stmt->execute();
+    if($stmt->execute()){
+        return $stmt;  
+    }
 
-    return $stmt;
   }
 
   // read jobs with pagination

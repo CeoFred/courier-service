@@ -190,7 +190,7 @@ if(typeof _bsa !== 'undefined' && _bsa) {
                                 <i class="fas fa-anchor mb-2"></i>
                                 
                                 <h5 class="card-title">Ocean Freight</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet consectetur elit,Adipisicing elit tempor.</p>
+                                <!-- <p class="card-text">Lorem ipsum dolor sit amet consectetur elit,Adipisicing elit tempor.</p> -->
                             </div>
                         </div>
 
@@ -202,7 +202,7 @@ if(typeof _bsa !== 'undefined' && _bsa) {
                                 <i class="fas fa-fighter-jet mb-2"></i>
                                 
                                 <h5 class="card-title">Air Freight</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet consectetur elit,Adipisicing elit tempor.</p>
+                                <!-- <p class="card-text">Lorem ipsum dolor sit amet consectetur elit,Adipisicing elit tempor.</p> -->
                             </div>
                         </div>
 
@@ -214,7 +214,7 @@ if(typeof _bsa !== 'undefined' && _bsa) {
                                 <i class="fas fa-truck mb-2"></i>
                                 
                                 <h5 class="card-title">Land Transport</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet consectetur elit,Adipisicing elit tempor.</p>
+                                <!-- <p class="card-text">Lorem ipsum dolor sit amet consectetur elit,Adipisicing elit tempor.</p> -->
                             </div>
                         </div>
                     </div>
@@ -224,7 +224,7 @@ if(typeof _bsa !== 'undefined' && _bsa) {
                                 <i class="fab fa-docker mb-2"></i>
                                 
                                 <h5 class="card-title">Supply</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet consectetur elit,Adipisicing elit tempor.</p>
+                                <!-- <p class="card-text">Lorem ipsum dolor sit amet consectetur elit,Adipisicing elit tempor.</p> -->
                             </div>
                         </div>
 
@@ -236,7 +236,7 @@ if(typeof _bsa !== 'undefined' && _bsa) {
 
                                 
                                 <h5 class="card-title">Fast & On Time</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet consectetur elit,Adipisicing elit tempor.</p>
+                                <!-- <p class="card-text">Lorem ipsum dolor sit amet consectetur elit,Adipisicing elit tempor.</p> -->
                             </div>
                         </div>
 
@@ -248,7 +248,7 @@ if(typeof _bsa !== 'undefined' && _bsa) {
                                 <i class="far fa-money-bill-alt mb-2"></i>
                                 
                                 <h5 class="card-title">Weather Insuarance</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet consectetur elit,Adipisicing elit tempor.</p>
+                                <!-- <p class="card-text">Lorem ipsum dolor sit amet consectetur elit,Adipisicing elit tempor.</p> -->
                             </div>
                         </div>
                     </div>
@@ -633,10 +633,10 @@ if(typeof _bsa !== 'undefined' && _bsa) {
                         <form action="#" method="post">
                             <div class="form-group">
                                 <label class="mb-2">TRACKING ID</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" required="">
+                                <input type="text" class="form-control" id="tracking_id" aria-describedby="emailHelp" placeholder="" required="">
                                 <small id="emailHelp" class="form-text text-muted">Key in your tracking id to know the state of your parcel</small>
                             </div>
-                            <button type="submit" class="btn btn-primary submit mb-4">TRACK</button>
+                            <button type="button" id="submit_track_btn" class="btn btn-primary submit mb-4">TRACK</button>
                            
                         </form>
                     </div>
@@ -646,58 +646,48 @@ if(typeof _bsa !== 'undefined' && _bsa) {
         </div>
     </div>
     <!--//Login-->
-    <!--/Register-->
-    <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="login px-4 mx-auto mw-100">
-                        <h5 class="text-center mb-4">Register Now</h5>
-                        <form action="#" method="post">
-                            <div class="form-group">
-                                <label>First name</label>
-
-                                <input type="text" class="form-control" id="validationDefault01" placeholder="" required="">
-                            </div>
-                            <div class="form-group">
-                                <label>Last name</label>
-                                <input type="text" class="form-control" id="validationDefault02" placeholder="" required="">
-                            </div>
-
-                            <div class="form-group">
-                                <label class="mb-2">Password</label>
-                                <input type="password" class="form-control" id="password1" placeholder="" required="">
-                            </div>
-                            <div class="form-group">
-                                <label>Confirm Password</label>
-                                <input type="password" class="form-control" id="password2" placeholder="" required="">
-                            </div>
-
-                            <button type="submit" class="btn btn-primary submit mb-4">Register</button>
-                            <p class="text-center pb-4">
-                                <a href="#">By clicking Register, I agree to your terms</a>
-                            </p>
-                        </form>
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <!--//Register-->
-
     <!--//model-form-->
     <!-- js -->
     <script src="js/jquery-2.2.3.min.js"></script>
     <script src="js/minimal-slider.js"></script>
     <!-- carousel -->
+    
     <script src="js/owl.carousel.js"></script>
+    <script>
+    let btn = document.getElementById('submit_track_btn')
+    btn.addEventListener('click',iniTrack)
+    
+    function iniTrack(){
+        data = {
+            tracking_id
+        }
+        console.log('Clicked')
+
+        const url = '/api/courier/track.php';
+        var myHeaders = new Headers()
+        myHeaders.append('Content-Type','Application/json')
+
+const signupRequest = new Request(url,{
+    method:'POST',
+    cache:'default',
+    headers:myHeaders,
+    body:JSON.stringify(data),
+    mode:'cors'
+})
+
+$.ajax({
+    url,
+    method:'POST',
+    data
+}).done(res => {
+    console.log(res)
+}).fail(err => {
+    console.log(err)
+})
+
+    }
+    </script>
+    
     <script>
         $(document).ready(function() {
             $('.owl-carousel').owlCarousel({

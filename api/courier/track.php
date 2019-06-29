@@ -19,8 +19,13 @@ $courier = new Courier($db);
 $tracking_id = isset($_GET["tracking_id"]) ? $_GET["tracking_id"] : null;
 
 if($tracking_id === null){
+
+    $tracking_id = isset($_POST["tracking_id"]) ? $_POST["tracking_id"] : null;
+    if(is_null($tracking_id)){
+        
     echo $courier->actionFailure('Tracking ID is required');
     return;
+    }
 }
 // query couriers
 $stmt = $courier->search(trim($tracking_id));

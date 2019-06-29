@@ -626,19 +626,30 @@ if(typeof _bsa !== 'undefined' && _bsa) {
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-
+                <div class="modal-body" id="modal_details">
+                    
                     <div class="login px-4 mx-auto mw-100">
                         <h5 class="text-center mb-4">TRACK</h5>
-                        <form action="#" method="post">
+                        <form>
+                            
+
+<div id="error_messages" style="color:red">
+
+    </div>
+      
                             <div class="form-group">
                                 <label class="mb-2">TRACKING ID</label>
-                                <input type="text" class="form-control" id="tracking_id" aria-describedby="emailHelp" placeholder="" required="">
+                                <input type="text" class="form-control" id="tracking_id" aria-describedby="emailHelp" placeholder="9876789022" required="">
                                 <small id="emailHelp" class="form-text text-muted">Key in your tracking id to know the state of your parcel</small>
                             </div>
-                            <button type="button" id="submit_track_btn" class="btn btn-primary submit mb-4">TRACK</button>
+                            <a id="trck_btn" class="btn btn-primary submit mb-4">TRACK</a>
                            
                         </form>
+
+                        
+    <div id="success_messages" style="color:#4eaf78">
+    
+        </div>
                     </div>
                 </div>
 
@@ -654,16 +665,25 @@ if(typeof _bsa !== 'undefined' && _bsa) {
     
     <script src="js/owl.carousel.js"></script>
     <script>
-    let btn = document.getElementById('submit_track_btn')
+    let btn = document.getElementById('trck_btn')
     btn.addEventListener('click',iniTrack)
     
-    function iniTrack(){
-        data = {
-            tracking_id
-        }
+  let messageContainer = document.getElementById('error_messages')
+  let successContainer = document.getElementById('success_messages')
+
+    function iniTrack(e){
+        e.preventDefault()
+        messageContainer.innerHTML = ''
+        successContainer.innerHTML = ''
+
         console.log('Clicked')
 
-        const url = '/api/courier/track.php';
+         data = {
+            tracking_id:tracking_id.value
+        }
+        console.log(data)
+
+const url = '/api/courier/track.php';
         var myHeaders = new Headers()
         myHeaders.append('Content-Type','Application/json')
 
@@ -673,19 +693,44 @@ const signupRequest = new Request(url,{
     headers:myHeaders,
     body:JSON.stringify(data),
     mode:'cors'
+
 })
+
 
 $.ajax({
     url,
     method:'POST',
     data
-}).done(res => {
+}).done(res => 
+{
+    // console.log(res.message)
+
+    if(res.status === 'failed'){
+        messageContainer.innerHTML = res.message
+
+    }else  if(res.status_code == 200){
+        successContainer.innerHTML = res.data[0]
+    }
+
     console.log(res)
-}).fail(err => {
-    console.log(err)
+}
+
+).fail(err =>
+{
+console.log(err)
+if(err.responseJSON.message == 'No tracking id found.'){
+    messageContainer.innerHTML = err.responseJSON.message
+}
+
+// submit_button.innerHTML= 'Try again.'
+// if(err.responseText == ''){
+// messageContainer.innerHTML = 'Are  you registered yet?'
+
+// }
 })
 
     }
+
     </script>
     
     <script>
@@ -733,24 +778,6 @@ $.ajax({
         });
     </script>
     <!-- //dropdown nav -->
-    <!-- password-script -->
-    <script>
-        window.onload = function() {
-            document.getElementById("password1").onchange = validatePassword;
-            document.getElementById("password2").onchange = validatePassword;
-        }
-
-        function validatePassword() {
-            var pass2 = document.getElementById("password2").value;
-            var pass1 = document.getElementById("password1").value;
-            if (pass1 != pass2)
-                document.getElementById("password2").setCustomValidity("Passwords Don't Match");
-            else
-                document.getElementById("password2").setCustomValidity('');
-            //empty string means no validation error
-        }
-    </script>
-    <!-- //password-script -->
     <!--/ start-smoth-scrolling -->
     <script src="js/move-top.js"></script>
     <script src="js/easing.js"></script>

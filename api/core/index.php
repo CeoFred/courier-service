@@ -457,7 +457,7 @@ class Courier extends Base {
     $stmt = $this->conn->prepare($query);
 
     // sanitize
-    $tracking_id = '131561763684';
+    $tracking_id = htmlspecialchars(strip_tags($tracking_id));
     
     // bind
     $stmt->bindParam(1, $tracking_id);

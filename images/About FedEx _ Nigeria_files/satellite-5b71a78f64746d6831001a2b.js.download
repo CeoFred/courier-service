@@ -1,0 +1,44 @@
+_satellite.pushBlockingScript(function(event, target, $variables){
+  /* 
+$("#global-login-wrapper").trigger("loggedIn");
+*/
+$("body").on("loggedIn",function(e){
+adobe.target.getOffer({  
+  "mbox": "target-global-mbox",  
+	"params" : {
+		"loggedIn" : "true"
+	},
+  "success": function(offers) {          
+        adobe.target.applyOffer( { 
+           "mbox": "target-global-mbox",
+           "offer": offers 
+        } );
+  },  
+  "error": function(status, error) {          
+      if (console && console.log) {
+        console.log(status);
+        console.log(error);
+      }
+  }});	
+});
+
+$("body").on("loggedOut",function() {
+	adobe.target.getOffer({  
+  "mbox": "target-global-mbox",  
+	"params" : {
+		"loggedIn" : "false"
+	},
+  "success": function(offers) {          
+        adobe.target.applyOffer( { 
+           "mbox": "target-global-mbox",
+           "offer": offers 
+        } );
+  },  
+  "error": function(status, error) {          
+      if (console && console.log) {
+        console.log(status);
+        console.log(error);
+      }
+  }});	
+});
+});

@@ -111,6 +111,9 @@ extract($data[0])
                     <div class="col-lg-3 price-left mt-lg-5 mt-2">
                         <h2 class="tittle text-left mb-md-5 mb-4">Details For <?=$_GET['tracking_id']?></h2>
                         <!-- <p>Lorem ipsum dolor sit amet Neque porro quisquam est qui dolorem Lorem int ipsum dolor sit amet when an unknown printer took a galley of type.Vivamus id tempor felis.ivamus id tempor felis. </p> -->
+                        <div id="bar_code">
+                        <img src="http://www.barcodes4.me/barcode/c128b/AnyValueYouWish.gif" alt="barcode" height="50">
+                        </div>
 
                     </div>
                     <div class="col-lg-9 price-right">

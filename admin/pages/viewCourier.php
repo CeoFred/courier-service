@@ -474,7 +474,7 @@ for (const key in data) {
 }
 
 
-const url = 'http://localhost:4040/api/courier/update.php';
+const url = '/api/courier/update.php';
         var myHeaders = new Headers()
         myHeaders.append('Content-Type','Application/json')
 

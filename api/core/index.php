@@ -185,7 +185,8 @@ class Courier extends Base {
                 departure_date=:departure_date,
                 pick_up_date=:pick_up_date,
                 pick_up_time=:pick_up_time,
-                expected_delivery_date=:expected_delivery_date
+                expected_delivery_date=:expected_delivery_date,
+                package_reference_no=:package_reference_no
                 
                  WHERE
                 tracking_id =:tracking_id AND package_status =:status";
@@ -213,7 +214,7 @@ class Courier extends Base {
     $this->pick_up_date = htmlspecialchars(strip_tags($this->pick_up_date));
     $this->pick_up_time =htmlspecialchars(strip_tags($this->pick_up_time));
     $this->expected_delivery_date = htmlspecialchars(strip_tags($this->expected_delivery_date));
-
+    $this->package_reference_no = time().uniqid();
 
     // bind new values
     $stmt->bindParam(':no_of_pakages', $this->no_of_pakages);
@@ -235,7 +236,7 @@ class Courier extends Base {
     $stmt->bindParam(':pick_up_date', $this->pick_up_date);
     $stmt->bindParam(':pick_up_time', $this->pick_up_time);
     $stmt->bindParam(':expected_delivery_date',$this->expected_delivery_date);
-
+    $stmt->bindParam(':package_reference_no',$this->package_reference_no);
     // execute the query
     if ($stmt->execute()) {
       return true;

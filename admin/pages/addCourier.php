@@ -2,7 +2,6 @@
 session_start();
 
 $name= $_SESSION['first_name'];
-var_dump($_SESSION);
 ?>
 
 <!DOCTYPE html>
@@ -362,7 +361,7 @@ for (const key in data) {
     }
 }
 
-const url = 'http://localhost:4040/api/courier/create.php';
+const url = '/api/courier/create.php';
         var myHeaders = new Headers()
         myHeaders.append('Content-Type','Application/json')
 
@@ -390,7 +389,7 @@ $.ajax({
      successContainer.innerText = 'Courier created with tracking ID '+res.data.t_id+' please wait'
 
      setTimeout(() => {
-        window.location.href = `http://localhost:4040/admin/pages/completePackageInformation.php?tracking_id=${res.data.t_id}&t=4242045958761391661397653`
+        window.location.replace(`/admin/pages/completePackageInformation.php?tracking_id=${res.data.t_id}&t=4242045958761391661397653`)
          
      }, 3000);
 

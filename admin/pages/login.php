@@ -242,6 +242,8 @@ for (const key in data) {
         if((element.trim()).length <= 0){
           messageContainer.innerHTML = `${key} was left empty`
             console.log(`${key} was left empty`)
+    submit_button.innerHTML= 'Login'
+
             return false;
         }
     }
@@ -269,11 +271,17 @@ $.ajax({
 {
     if(res.status === 'failed'){
       messageContainer.innerHTML = res.message
+    submit_button.innerHTML= 'Login'
+
         console.log(res.message)
     }else  if(res.status_code == 200){
-        window.location.href = 'http://localhost:4040/admin/dashboard.php?reg=true&admin_id='+res.message.data[0].admin_id+'&first_name='+res.message.data[0].first_name
-     submit_button.innerHTML= 'Logged In!..'
+        submit_button.innerHTML= 'Logged In!..'
      successContainer.innerText = 'Logged in Successful'
+     setTimeout(() => {
+        window.location.replace('/admin/dashboard.php?reg=true&admin_id='+res.message.data[0].admin_id+'&first_name='+res.message.data[0].first_name)
+         
+     }, 1500);
+     
     }
 
     console.log(res)}
@@ -281,11 +289,12 @@ $.ajax({
 ).catch(err =>
 {
 console.log(err)
-submit_button.innerHTML= 'Try again.'
+
 if(err.responseText == ''){
 messageContainer.innerHTML = 'Are  you registered yet?'
-
 }
+submit_button.innerHTML= 'Login'
+
 })
 
 }

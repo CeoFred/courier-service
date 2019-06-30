@@ -404,7 +404,7 @@ $.ajax({
      successContainer.innerText = 'Courier Successfully Updated,please wait..'
 
      setTimeout(() => {
-        window.location.href = `http://localhost:4040/admin/pages/viewCourier.php?tracking_id=<?=$tracking_id?>&updated=true`
+        window.location.replace(`/admin/pages/viewCourier.php?tracking_id=<?=$tracking_id?>&updated=true`)
          
      }, 3000);
 

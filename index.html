@@ -55,10 +55,10 @@ if(typeof _bsa !== 'undefined' && _bsa) {
                 <div class="slide">
                     <div class="slide-caption">
                         <p>The right choice</p>
-                        <h3>Propel <span>yourself</span> into the future.</h3>
+                        <h3>Have a <span>package</span>?.</h3>
                         <div class="cont-btn">
-                            <a class="btn text-uppercase" href="contact.html">
-                            Contact</a>
+                            <a class="btn text-uppercase" href="#" data-toggle="modal" data-target="#exampleModalCenter">
+                            Track</a>
                         </div>
 
                     </div>
@@ -566,16 +566,19 @@ if(typeof _bsa !== 'undefined' && _bsa) {
             <div class="inner-sec-w3layouts py-md-5 py-3">
                 <h3 class="tittle text-center mb-md-5 mb-4 text-white">Subscribe our Newsletter</h3>
                 <div class="n-right-w3ls">
-                    <form action="#" method="post">
-                        <div class="form-group">
-                            <input class="form-control" type="text" name="Name" placeholder="Name" required="">
+                    <form>
+                        <div id="form_message" style="color: #fff">
+
                         </div>
                         <div class="form-group">
-                            <input class="form-control" type="email" name="Email" placeholder=" Email Address" required="">
+                            <input class="form-control" id="sub_first_name" type="text" name="Name" placeholder="Name" required="">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" id="sub_first_email" type="email" name="Email" placeholder=" Email Address" required="">
                         </div>
 
                         <div class="form-group">
-                            <input class="form-control submit text-uppercase" type="submit" value="Subscribe">
+                            <input class="form-control submit text-uppercase" id="subscribe_btn" type="button" value="Subscribe">
                         </div>
                         <div class="clearfix"></div>
                     </form>
@@ -642,13 +645,16 @@ if(typeof _bsa !== 'undefined' && _bsa) {
                                 <input type="text" class="form-control" id="tracking_id" aria-describedby="emailHelp" placeholder="9876789022" required="">
                                 <small id="emailHelp" class="form-text text-muted">Key in your tracking id to know the state of your parcel</small>
                             </div>
-                            <a id="trck_btn" class="btn btn-primary submit mb-4">TRACK</a>
+                            <button id="trck_btn" class="btn btn-success submit mb-4">TRACK</button>
                            
                         </form>
 
                         
     <div id="success_messages" style="color:#4eaf78">
     
+        </div>
+
+        <div id="details_messages" style="font-size:10px;">
         </div>
                     </div>
                 </div>
@@ -664,25 +670,47 @@ if(typeof _bsa !== 'undefined' && _bsa) {
     <!-- carousel -->
     
     <script src="js/owl.carousel.js"></script>
+
+    
+    <script>
+            const btn2 = document.getElementById('subscribe_btn');
+            btn2.addEventListener('click',function(e){
+                // e.preventDefault()
+                if(sub_first_name.value == '' || sub_email.value == ''){
+                document.getElementById('form_message').innerHTML = 'Details are incomplete!'
+
+                }
+                document.getElementById('form_message').innerHTML = 'Subscription was successful!'
+            })
+            </script>
     <script>
     let btn = document.getElementById('trck_btn')
     btn.addEventListener('click',iniTrack)
     
   let messageContainer = document.getElementById('error_messages')
   let successContainer = document.getElementById('success_messages')
+  let detailsContainer = document.getElementById('details_messages')
+
 
     function iniTrack(e){
         e.preventDefault()
         messageContainer.innerHTML = ''
         successContainer.innerHTML = ''
-
-        console.log('Clicked')
+        btn.innerHTML = 'Searching...'
+        btn.disabled = true
 
          data = {
             tracking_id:tracking_id.value
         }
-        console.log(data)
 
+        console.log(data)
+        if(data.tracking_id.length <= 0){
+        messageContainer.innerHTML = 'Tracking ID was left emptyy'
+        btn.innerHTML = 'TRACK'
+        btn.disabled = false
+        return false
+        }
+        
 const url = '/api/courier/track.php';
         var myHeaders = new Headers()
         myHeaders.append('Content-Type','Application/json')
@@ -706,21 +734,79 @@ $.ajax({
     // console.log(res.message)
 
     if(res.status === 'failed'){
+        btn.innerHTML = 'TRACK'
+        btn.disabled = false
         messageContainer.innerHTML = res.message
 
     }else  if(res.status_code == 200){
-        successContainer.innerHTML = res.data[0]
+                btn.innerHTML = 'Waiting...'
+        successContainer.innerHTML = 'Please verify details below'
+        for (const key in res.data[0]) {
+            if (res.data[0].hasOwnProperty(key)) {
+                const element = res.data[0][key];
+
+                for (const k in element) {
+                    if (element.hasOwnProperty(k)) {
+                        const elem = element[k];
+                        if(k == 'receiver_first_name'){
+                detailsContainer.innerHTML += `<div>Recievers First Name - ${elem}</div>`
+            }
+            if(k == 'receiver_last_name'){
+                detailsContainer.innerHTML += `<div>Recievers Last Name - ${elem}</div>`
+            }
+            if(k == 'shipper_last_name'){
+                detailsContainer.innerHTML += `<div>Senders Last Name - ${elem}</div>`
+            }
+            if(k == 'shipper_first_name'){
+                detailsContainer.innerHTML += `<div>Senders First Name - ${elem}</div>`
+            }
+                    }
+                }
+
+                detailsContainer.innerHTML += `
+                            <button id="trck_btn_veify" class="btn btn-success btn-sm  submit mb-4">Verify</button>
+                            <button id="trck_btn_cancel" class="btn btn-danger btn-sm submit mb-4">Reject</button>
+                
+                `
+            }
+        }
     }
 
     console.log(res)
+    document.getElementById('trck_btn_veify').addEventListener('click',function(){
+        detailsContainer.innerHTML = ''
+        successContainer.innerHTML = 'Redirecting you to details page..'        
+        btn.innerHTML = 'Confirmed!'
+        setTimeout(() => {
+        window.location.replace(`track.php?tracking_id=${tracking_id.value}`)
+
+            }, 2000);
+        
+    })
+    document.getElementById('trck_btn_cancel').addEventListener('click',function(){
+        detailsContainer.innerHTML = ''
+        successContainer.innerHTML = '' 
+        btn.innerHTML = 'TRACK'
+        btn.disabled = false
+        tracking_id.value = ''
+
+    })
 }
 
 ).fail(err =>
 {
 console.log(err)
-if(err.responseJSON.message == 'No tracking id found.'){
+if(err.responseText == "Connection error: SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it."){
+    messageContainer.innerHTML = 'Whooops! Something went wrong,contact admin'
+      btn.innerHTML = 'TRACK'
+        btn.disabled = false
+}else if(err.responseJSON.message == 'No tracking id found.'){
+      btn.innerHTML = 'TRACK'
+        btn.disabled = false
     messageContainer.innerHTML = err.responseJSON.message
 }
+  btn.innerHTML = 'TRACK'
+        btn.disabled = false
 
 // submit_button.innerHTML= 'Try again.'
 // if(err.responseText == ''){

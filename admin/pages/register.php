@@ -264,7 +264,7 @@ for (const key in data) {
     }
 }
 
-const url = 'http://localhost:4040/api/courier/admin/signup.php';
+const url = '/api/courier/admin/signup.php';
         var myHeaders = new Headers()
         myHeaders.append('Content-Type','Application/json')
 
@@ -288,7 +288,7 @@ $.ajax({
       messageContainer.innerHTML = res.message
         console.log(res.message)
     }else  if(res.status_code == 200){
-        window.location.href = 'http://localhost:4040/admin/pages/login.php?reg=true&t=4242045958761391661397653'
+        window.location.replace('/admin/pages/login.php?reg=true&t=4242045958761391661397653')
      submit_button.innerHTML= 'Great!..'
      successContainer.innerText = res.message
 

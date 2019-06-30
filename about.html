@@ -75,10 +75,10 @@
 
                             </ul>
 
-                            <div class="log-in">
+                            <!-- <div class="log-in">
                                 <a class="btn text-uppercase" href="#" data-toggle="modal" data-target="#exampleModalCenter">
                                     TRACK</a>
-                            </div>
+                            </div> -->
                         </div>
 
                     </nav>
@@ -149,16 +149,20 @@
             <div class="inner-sec-w3layouts py-md-5 py-3">
                 <h3 class="tittle text-center mb-md-5 mb-4 text-white">Subscribe our Newsletter</h3>
                 <div class="n-right-w3ls">
-                    <form action="#" method="post">
+                    <form >
+                        
+                            <div id="form_message" style="color: #fff">
+
+                                </div>
                         <div class="form-group">
-                            <input class="form-control" type="text" name="Name" placeholder="Name" required="">
+                            <input class="form-control" id="sub_first_name" type="text" name="Name" placeholder="Name" required="">
                         </div>
                         <div class="form-group">
-                            <input class="form-control" type="email" name="Email" placeholder=" Email Address" required="">
+                            <input class="form-control" id="sub_email" type="email" name="Email" placeholder=" Email Address" required="">
                         </div>
 
                         <div class="form-group">
-                            <input class="form-control submit text-uppercase" type="submit" value="Subscribe">
+                            <input class="form-control submit text-uppercase" id="subscribe_btn" type="button" value="Subscribe">
                         </div>
                         <div class="clearfix"></div>
                     </form>
@@ -197,92 +201,6 @@
         </div>
     </footer>
     <!--//newsletter-->
-    <!--model-forms-->
-    <!--/Login-->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-
-                    <div class="login px-4 mx-auto mw-100">
-                        <h5 class="text-center mb-4">Login Now</h5>
-                        <form action="#" method="post">
-                            <div class="form-group">
-                                <label class="mb-2">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" required="">
-                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                            </div>
-                            <div class="form-group">
-                                <label class="mb-2">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="" required="">
-                            </div>
-                            <div class="form-check mb-2">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                            </div>
-                            <button type="submit" class="btn btn-primary submit mb-4">Sign In</button>
-                            <p class="text-center pb-4">
-                                <a href="#" data-toggle="modal" data-target="#exampleModalCenter2"> Don't have an account?</a>
-                            </p>
-                        </form>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <!--//Login-->
-    <!--/Register-->
-    <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="login px-4 mx-auto mw-100">
-                        <h5 class="text-center mb-4">Register Now</h5>
-                        <form action="#" method="post">
-                            <div class="form-group">
-                                <label>First name</label>
-
-                                <input type="text" class="form-control" id="validationDefault01" placeholder="" required="">
-                            </div>
-                            <div class="form-group">
-                                <label>Last name</label>
-                                <input type="text" class="form-control" id="validationDefault02" placeholder="" required="">
-                            </div>
-
-                            <div class="form-group">
-                                <label class="mb-2">Password</label>
-                                <input type="password" class="form-control" id="password1" placeholder="" required="">
-                            </div>
-                            <div class="form-group">
-                                <label>Confirm Password</label>
-                                <input type="password" class="form-control" id="password2" placeholder="" required="">
-                            </div>
-
-                            <button type="submit" class="btn btn-primary submit mb-4">Register</button>
-                            <p class="text-center pb-4">
-                                <a href="#">By clicking Register, I agree to your terms</a>
-                            </p>
-                        </form>
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <!--//Register-->
-    <!--//model-form-->
     <!-- js -->
     <script src="js/jquery-2.2.3.min.js"></script>
     <!-- carousel -->
@@ -316,6 +234,18 @@
             })
         })
     </script>
+    
+    <script>
+            const btn = document.getElementById('subscribe_btn');
+            btn.addEventListener('click',function(e){
+                // e.preventDefault()
+                if(sub_first_name.value == '' || sub_email.value == ''){
+                document.getElementById('form_message').innerHTML = 'Details are incomplete!'
+
+                }
+                document.getElementById('form_message').innerHTML = 'Subscription was successful!'
+            })
+            </script>
     <!-- //carousel -->
     <script>
         $(document).ready(function() {
@@ -332,25 +262,7 @@
         });
     </script>
     <!-- //dropdown nav -->
-    <!-- password-script -->
-    <script>
-        window.onload = function() {
-            document.getElementById("password1").onchange = validatePassword;
-            document.getElementById("password2").onchange = validatePassword;
-        }
-
-        function validatePassword() {
-            var pass2 = document.getElementById("password2").value;
-            var pass1 = document.getElementById("password1").value;
-            if (pass1 != pass2)
-                document.getElementById("password2").setCustomValidity("Passwords Don't Match");
-            else
-                document.getElementById("password2").setCustomValidity('');
-            //empty string means no validation error
-        }
-    </script>
-    <!-- //password-script -->
-
+  
     <!--/ start-smoth-scrolling -->
     <script src="js/move-top.js"></script>
     <script src="js/easing.js"></script>
@@ -388,6 +300,4 @@
     <!-- //js -->
 </body>
 
-
-<!-- Mirrored from demo.w3layouts.com/demos_new/template_demo/03-09-2018/shipment_demo_Free/250363651/web/about.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 24 Jun 2019 22:55:01 GMT -->
 </html>

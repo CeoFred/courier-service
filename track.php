@@ -110,7 +110,6 @@ extract($data[0])
                 <div class="row">
                     <div class="col-lg-3 price-left mt-lg-5 mt-2">
                         <h2 class="tittle text-left mb-md-5 mb-4">Details For <?=$_GET['tracking_id']?></h2>
-                        <!-- <p>Lorem ipsum dolor sit amet Neque porro quisquam est qui dolorem Lorem int ipsum dolor sit amet when an unknown printer took a galley of type.Vivamus id tempor felis.ivamus id tempor felis. </p> -->
                         <div id="bar_code">
                         <img src="http://www.barcodes4.me/barcode/c128b/AnyValueYouWish.gif" alt="barcode" height="50">
                         </div>
@@ -130,11 +129,9 @@ extract($data[0])
                                                     <div class="card-body">
                                                         <h4 class="text-uppercase mb-3">Senders Details</h4>
                                                         <h5 class="card-title pricing-card-title">
-                                                            <!-- <span class="align-top">$</span>30 -->
 
                                                         </h5>
                                                         <ul class="list-unstyled mt-3 mb-4">
-                                                        <!-- loop senders detials here -->
                                                             
                                                          <li>   <?='First-Name: '.$shipper_first_name?></li>
                                                           <li>  <?='Last-Name: '.$shipper_last_name?></li>
@@ -155,7 +152,6 @@ extract($data[0])
                                                     <div class="card-body">
                                                         <h4 class="text-uppercase mb-3">Receievers Details</h4>
                                                         <h5 class="card-title pricing-card-title">
-                                                            <!-- <span class="align-top">$</span>90 -->
 
                                                         </h5>
                                                         <ul class="list-unstyled mt-3 mb-4">

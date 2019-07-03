@@ -319,7 +319,7 @@ $p = extract($tracking_data);
 
                                 <label>Number Packages</label>
                                 <div class="form-group">
-                                    <input value=<?=$no_of_pakages?> id="no_of_pakages" type="text" class="form-control">
+                                    <input value="<?=$no_of_pakages?>" id="no_of_pakages" type="text" class="form-control">
                                 </div>
 
                                 <label>Destination</label>
@@ -358,7 +358,7 @@ $p = extract($tracking_data);
 
                                 <label >Departure Time</label>
                                 <div class="form-group">
-                                    <input type="text" id="departure_time" value=<?=$departure_time?> class="form-control" >
+                                    <input type="time" id="departure_time" value="<?=$departure_time?>" class="form-control" >
                                 </div>
 
                                 <label>Pick Up Time</label>

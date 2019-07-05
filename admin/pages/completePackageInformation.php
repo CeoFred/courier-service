@@ -341,7 +341,7 @@ function createCourier(){
     messageContainer.innerHTML = '';
 
 
- data = {
+ const data = {
     no_of_pakages:no_of_pakages.value,
     package_destination:package_destination.value,
     package_carrier:package_carrier.value,
@@ -358,7 +358,7 @@ function createCourier(){
     tracking_id:"<?=$tracking_id?>"
 }
 
-// console.log(data)
+console.log(data)
 // return;
 
 for (const key in data) {
@@ -375,7 +375,7 @@ for (const key in data) {
     }
 }
 
-const url = 'http://localhost:4040/api/courier/add_package_info.php';
+const url = '/api/courier/add_package_info.php';
         var myHeaders = new Headers()
         myHeaders.append('Content-Type','Application/json')
 

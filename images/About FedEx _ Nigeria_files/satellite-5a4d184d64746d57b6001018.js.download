@@ -1,3 +1,0 @@
-_satellite.pushBlockingScript(function(event, target, $variables){
-  window.fdx_locale = _satellite.getVar("content:locale");
-});

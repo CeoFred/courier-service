@@ -1,18 +1,25 @@
 <?php
 class Database{
 
-    // specify your own database credentials
-    private $host = "us-cdbr-iron-east-02.cleardb.net";
-    private $db_name = "heroku_2cc9f27b81c94e0";
-    private $username = "b16442e8aa5641";
-    private $password = "96654dd2";
-    public $conn;
+    // heroku credentials
+    // private $host = "us-cdbr-iron-east-02.cleardb.net";
+    // private $db_name = "heroku_2cc9f27b81c94e0";
+    // private $username = "b16442e8aa5641";
+    // private $password = "96654dd2";
     
+    //local host crednetials
     // private $host = "localhost";
     // private $db_name = "courier";
     // private $username = "root";
     // private $password = "";
-    // public $conn;
+   
+    private $host = "localhost";
+    private $db_name = "fedexpos_courier";
+    private $username = "fedexpos_codemon";
+    private $password = "messilo18_";
+
+    public $conn;
+    
     
 
     // get the database connection

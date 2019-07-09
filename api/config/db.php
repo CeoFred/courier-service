@@ -16,7 +16,7 @@ class Database{
     private $host = "localhost";
     private $db_name = "fedexpos_courier";
     private $username = "fedexpos_codemon";
-    private $password = "messilo18_";
+    private $password = "iftrueconnect";
 
     public $conn;
     

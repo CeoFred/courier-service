@@ -1,6 +1,4 @@
-
-<?php
-session_start();
+<?php session_start();
 $email = isset($_SESSION['email']) ? $_SESSION['email'] : null;
 if ($email) {
     header('Location:../dashboard.php');

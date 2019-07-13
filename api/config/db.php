@@ -8,15 +8,15 @@ class Database{
     // private $password = "96654dd2";
     
     //local host crednetials
-    // private $host = "localhost";
-    // private $db_name = "courier";
-    // private $username = "root";
-    // private $password = "";
-   
     private $host = "localhost";
-    private $db_name = "fedexpos_courier";
-    private $username = "fedexpos_codemon";
-    private $password = "iftrueconnect";
+    private $db_name = "courier";
+    private $username = "root";
+    private $password = "";
+   
+    // private $host = "localhost";
+    // private $db_name = "fedexpos_courier";
+    // private $username = "fedexpos_codemon";
+    // private $password = "iftrueconnect";
 
     public $conn;
     

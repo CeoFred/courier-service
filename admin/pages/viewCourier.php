@@ -68,7 +68,12 @@ $p = extract($tracking_data);
 <!-- CSS Just for demo purpose, don't include it in your project -->
 <link href="../assets/demo/demo.css" rel="stylesheet" />
 
-    
+<style>
+#trackid_ {
+  display: none;
+}
+
+</style>
     </head>
 
     <body class=" sidebar-mini ">
@@ -173,9 +178,28 @@ $p = extract($tracking_data);
 					<span class="navbar-toggler-bar bar3"></span>
 				</button>
 			</div>
-      
-			<a class="navbar-brand" href="#pablo">Courier Package - <?=$tracking_id?></a>
+            <input type="text" value="<?=$tracking_id?>" id="trackid_">
+
+            <a class="navbar-brand" href="#pablo">Courier Package - <?=$tracking_id?></a>
+            
+<button onclick="copyToClipboard(<?=$tracking_id?>)" type="button" class="btn btn-fill btn-rounded btn-primary">Copy</button>
+
 		</div>
+        <script>
+const copyToClipboard = str => {
+  const el = document.createElement('textarea');
+  el.value = str;
+  el.setAttribute('readonly', '');
+  el.style.position = 'absolute';
+  el.style.left = '-9999px';
+  document.body.appendChild(el);
+  el.select();
+  document.execCommand('copy');
+  document.body.removeChild(el);
+  alert('copied!')
+};
+
+</script>
 
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-bar navbar-kebab"></span>
@@ -375,6 +399,10 @@ $p = extract($tracking_data);
                                 <div class="form-group">
                                     <textarea id="comments" id="comments" class="form-control" rows="10"><?=$comments?></textarea>
                                 </div>
+                                <div class="form-group">
+                                    <input value="<?=$tracking_id?>" id="trackid" type="hidden" class="form-control">
+                                </div>
+
 
         
     </div>
@@ -387,11 +415,9 @@ $p = extract($tracking_data);
 <div id="success_messages" style="color:teal">
 
 </div>
-
-   
-
        <div class="card-footer ">
         <button type="button" class="btn btn-fill btn-rounded btn-secondary" id="update_corrier">Update</button>
+    </button>
     </div>
     
 </div>
@@ -406,7 +432,7 @@ $p = extract($tracking_data);
              </div>
           
         </div>
-    
+       
 
 <!--   Core JS Files   -->
 <script src="../assets/js/core/jquery.min.js" ></script>
@@ -414,8 +440,6 @@ $p = extract($tracking_data);
 <script src="../assets/js/core/bootstrap.min.js" ></script>
 <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js" ></script>
 <script src="../assets/js/now-ui-dashboard.min290d.js?v=1.4.1" type="text/javascript"></script>
-
-
 
 <script>
 
@@ -457,7 +481,7 @@ function updateCourier(){
     shipper_number:shipper_number.value
     }
 
-// console.log(data)
+// (data)
 
 for (const key in data) {
     if (data.hasOwnProperty(key)) {
@@ -465,7 +489,6 @@ for (const key in data) {
         if((element.trim()).length <= 0){
             window.scrollTo(0,0)
           messageContainer.innerHTML = `${key} was left empty`
-            console.log(`${key} was left empty`)
             updated_btn.innerHTML= 'Retry'
 
             return false;
@@ -500,14 +523,10 @@ $.ajax({
 
     }, 2000);
 
-console.log(res)
 }).fail(err => {
     messageContainer.innerHTML = ''
     messageContainer.innerHTML = err.responseText || err.responseJSON.message
     updated_btn.innerHTML= 'Retry'
-
-console.log(err)
-
 })
 }
 

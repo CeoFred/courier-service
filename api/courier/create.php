@@ -54,7 +54,7 @@ if(
     $courier->receiver_country = trim($_REQUEST['receiver_country']);
 
     $courier->created_at = date('Y-m-d H:i:s');
-    $courier->tracking_id = rand(3,34).time();
+    $courier->tracking_id = rand(3,34).time();      
 
     // create the courier 
     if($courier->create()){

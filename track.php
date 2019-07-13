@@ -139,8 +139,11 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
                     <div class="col-lg-3 price-left mt-lg-5 mt-2">
                         <h2 class="tittle text-left mb-md-5 mb-4">Details For <?=$_GET['tracking_id']?></h2>
                         <div id="bar_code">
-                        <img src="http://www.barcodes4.me/barcode/c128b/AnyValueYouWish.gif" alt="barcode" height="50">
+                        <img src="http://www.barcodes4.me/barcode/c128b/AnyValueYouWish.gif" alt="barcode" height="100" width="100%">
                         </div>
+                        
+                        <img src="images/protected.png" alt="protected" height="100" srcset="">
+                        <img src="images/verified.png" alt="verified" height="100" srcset="">
 
                     </div>
                     <div class="col-lg-9 price-right">
@@ -260,6 +263,44 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
             </div>
         </div>
     </section>
+    <footer class="newsletter_right_w3agile bg-dark pymd-5 py-4">
+        <div class="container">
+            <div class="inner-sec-w3layouts py-md-5 py-3">
+                <div class="row footer-bottom-wthree mt-lg-5 mt-3">
+                    <div class="col-lg-6 copyright">
+                        <h2><a class="navbar-brand" href="index.html">
+                                <img src="images/logo.png" height="50"></a>
+                            
+                        </a></h2>
+                        <p class="copy-right mt-3">© Fedex 1995-2019. All Rights Reserved                         </p>
+                    </div>
+                    <div class="col-lg-6 social-icon footer">
+                        <ul class="links-nav d-flex justify-content-end">
+                            <li>
+                                <a href="index.html">Home</a>
+                            </li>
+                            <li>
+                                <a href="about.html">About</a>
+                            </li>
+
+                            <li>
+                                <a href="contact.html">Contact</a>
+                            </li>
+                        </ul>
+                        <ul class="social-icons d-flex justify-content-end mt-3">
+                            <li class="mr-1"><a href="https://www.facebook.com/fedex"><span class="fab fa-facebook-f"></span></a></li>
+                            <li class="mx-1"><a href="https://twitter.com/fedex"><span class="fab fa-twitter"></span></a></li>
+                            <li class="mx-1"><a href="http://www.instagram.com/fedex"><span class="fab fa-instagram"></span></a></li>
+                            <li class="mx-1"><a href="http://www.linkedin.com/company/fedex"><span class="fab fa-linkedin-in"></span></a></li>
+                        </ul>
+                    </div>
+                    <div class="clearfix"></div>
+
+                </div>
+
+            </div>
+        </div>
+    </footer>
     <!-- //pricing -->
     <!---728x90--->
 

@@ -17,7 +17,15 @@ $database = new Database();
 $db = $database->getConnection();
 
 $courier = new Courier($db);
+function randomNumber($length) {
+    $result = '';
 
+    for($i = 0; $i < $length; $i++) {
+        $result .= mt_rand(0, 9);
+    }
+
+    return $result;
+}
 
 // var_dump($_REQUEST);
 // die();
@@ -54,7 +62,7 @@ if(
     $courier->receiver_country = trim($_REQUEST['receiver_country']);
 
     $courier->created_at = date('Y-m-d H:i:s');
-    $courier->tracking_id = rand(3,34).time();      
+    $courier->tracking_id = randomNumber(12);      
 
     // create the courier 
     if($courier->create()){

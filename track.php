@@ -15,7 +15,10 @@ $conn = $db->getConnection();
 $courier = new Courier($conn);
 
 $data = $courier->search($tracking_id)->fetchAll(PDO::FETCH_ASSOC);
-// var_dump($data);
+$valid = isset($data) ? count($data) : null;
+if(!$valid){
+    header('Location: index.html?error=courier_not_found');
+}
 extract($data[0])
 ?>
 

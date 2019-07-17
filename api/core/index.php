@@ -407,7 +407,7 @@ class Courier extends Base {
   }
 
   // delete the courier
-  function delete(String $tracking_id)
+  function delete($tracking_id)
   {
     // delete query
     $query = "UPDATE $this->table_name
@@ -443,7 +443,7 @@ class Courier extends Base {
             FROM
                 " . $this->table_name . "
             WHERE
-            tracking_id = ?";
+            tracking_id = ? AND package_status = ?";
 
     // prepare query statement
     $stmt = $this->conn->prepare($query);
@@ -453,7 +453,7 @@ class Courier extends Base {
     
     // bind
     $stmt->bindParam(1, $tracking_id);
-    // $stmt->bindParam(2, $this->active_status);
+    $stmt->bindParam(2, $this->active_status);
 
 
     // execute query

@@ -472,7 +472,7 @@ function updateCourier(){
     receiver_first_name:receiver_first_name.value,
     receiver_last_name:receiver_last_name.value,
     receiver_country:receiver_country.value,
-    receiver_number:receiver_country.value,
+    receiver_number:receiver_number.value,
     shipper_email:shipper_email.value,
     shipper_address:shipper_address.value,
     shipper_first_name:shipper_first_name.value,

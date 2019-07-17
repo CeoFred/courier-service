@@ -265,7 +265,7 @@ const copyToClipboard = str => {
     
                                 <label>Address</label>
                                 <div class="form-group">
-                                    <input id="receiver_address" value=<?=$receiver_address?> type="text" class="form-control">
+                                <textarea id="receiver_address" class="form-control" rows="10"><?=$receiver_address?></textarea>
                                 </div>
                                 <label>Email</label>
                                 <div class="form-group">
@@ -302,6 +302,7 @@ const copyToClipboard = str => {
                                 <div class="form-group">
                                     <input id="shipper_first_name" value="<?=$shipper_first_name?>" type="text" class="form-control">
                                 </div>
+
                                 <label>Last Name</label>
                                 <div class="form-group">
                                     <input id="shipper_last_name" value=<?=$shipper_last_name?> type="text" class="form-control">
@@ -309,8 +310,9 @@ const copyToClipboard = str => {
     
                                 <label>Address</label>
                                 <div class="form-group">
-                                    <input id="shipper_address" value=<?=$shipper_address?> type="text" class="form-control">
+                                <textarea id="shipper_address" class="form-control" rows="10"><?=$shipper_address?></textarea>
                                 </div>
+
                                 <label>Email</label>
                                 <div class="form-group">
                                     <input id="shipper_email" value=<?=$shipper_email?> type="email" class="form-control">

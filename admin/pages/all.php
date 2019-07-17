@@ -207,31 +207,23 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
                   <div class="content">
                           <div class="row">
         <div class="col-md-12">
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <div class="card">
     <div class="card-header">
-        <!-- <h4 class="card-title"> Simple Table</h4> -->
+        <h4 class="card-title"><?php 
+        if(isset($_SESSION['c_deleted'])){
+            echo 'Deleted Courier';
+            unset($_SESSION['c_deleted']);
+        }
+        if(isset($_SESSION['c_deleted_false'])){
+            echo 'Failed to Delete Courier';
+            unset($_SESSION['c_deleted_false']);
+
+        }
+        ?></h4>
         
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            
-            
             <table class="table">
                 <thead class="text-primary">
                     
@@ -334,7 +326,7 @@ foreach ($res as $key => $value) {
 
 
 
-<a href="deleteCourier.php?tracking_id='.$value['tracking_id'].'" rel="tooltip" class="btn btn-danger btn-icon btn-sm ">
+<a href="delete.php?tracking_id='.$value['tracking_id'].'" rel="tooltip" class="btn btn-danger btn-icon btn-sm ">
 
 <i class="now-ui-icons ui-1_simple-remove"></i>
 

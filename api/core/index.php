@@ -406,38 +406,29 @@ class Courier extends Base {
     return false;
   }
 
-  // delete the job
-  function delete()
+  // delete the courier
+  function delete(String $tracking_id)
   {
-
-
-    if(!$this->is_workable()){
-      return false;
-    }
-
     // delete query
-    $query = "UPDATE " . $this->table_name . "
-    SET status = ?,
-    deleted_at = ?
-    WHERE job_id = ? AND status = ?";
+    $query = "UPDATE $this->table_name
+    SET package_status =:package_status,
+    deleted_at =:deleted_at
+    WHERE tracking_id =:tracking_id";
 
     // prepare query
     $stmt = $this->conn->prepare($query);
 
     // sanitize
-    $this->id = htmlspecialchars(strip_tags($this->id));
+    $this->id = htmlspecialchars(strip_tags($tracking_id));
     $this->deleted_at = date('Y-m-d H:i:s');
-    
     // bind id of record to delete
-    $stmt->bindParam(1, $this->not_active);
-    $stmt->bindParam(2, $this->deleted_at);
-    $stmt->bindParam(3, $this->id);
-    $stmt->bindParam(4, $this->active_status);
-
+    $stmt->bindParam("package_status", $this->not_active);
+    $stmt->bindParam("deleted_at", $this->deleted_at);
+    $stmt->bindParam("tracking_id", $this->id);
 
     // execute query
     if ($stmt->execute()) {
-      return true;
+      return $stmt;
     }
 
     return false;

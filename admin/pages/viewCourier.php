@@ -454,7 +454,8 @@ let messageContainer = document.getElementById('error_messages')
 
 // update courier
 function updateCourier(){
-    updated_btn.innerHTML = 'Working....'
+    updated_btn.innerHTML = 'Working....';
+
     data = {
     no_of_pakages:no_of_pakages.value,
     package_destination:package_destination.value,
@@ -511,6 +512,8 @@ const signupRequest = new Request(url,{
     mode:'cors'
 
 })
+
+console.table(data);
 
 $.ajax({
     url,

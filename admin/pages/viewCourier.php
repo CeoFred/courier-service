@@ -513,7 +513,6 @@ const signupRequest = new Request(url,{
 
 })
 
-console.table(data);
 
 $.ajax({
     url,

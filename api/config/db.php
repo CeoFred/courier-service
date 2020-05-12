@@ -2,16 +2,16 @@
 class Database{
 
     // heroku credentials
-//     private $host = "us-cdbr-east-06.cleardb.net";
-//     private $db_name = "heroku_cfa038a59a6920c";
-//     private $username = "b8e93990aa4e63";
-//     private $password = "8d33f7af ";
+    private $host = "us-cdbr-east-06.cleardb.net";
+    private $db_name = "heroku_cfa038a59a6920c";
+    private $username = "b8e93990aa4e63";
+    private $password = "8d33f7af ";
     
-$url = parse_url("mysql://b8e93990aa4e63:8d33f7af@us-cdbr-east-06.cleardb.net/heroku_cfa038a59a6920c?reconnect=true");
-private $host = $url["host"];
-private $username = $url["user"];
-private $password = $url["pass"];
-private $db_name = substr($url["path"], 1);
+// $url = parse_url("mysql://b8e93990aa4e63:8d33f7af@us-cdbr-east-06.cleardb.net/heroku_cfa038a59a6920c?reconnect=true");
+// private $host = $url["host"];
+// private $username = $url["user"];
+// private $password = $url["pass"];
+// private $db_name = substr($url["path"], 1);
     
     //local host crednetials
 //     private $host = "localhost";

@@ -2,10 +2,10 @@
 class Database{
 
     // heroku credentials
-    private $host = "us-cdbr-iron-east-02.cleardb.net";
-    private $db_name = "heroku_2cc9f27b81c94e0";
-    private $username = "b16442e8aa5641";
-    private $password = "96654dd2";
+    private $host = "mysql://b8e93990aa4e63:8d33f7af@us-cdbr-east-06.cleardb.net/heroku_cfa038a59a6920c?reconnect=true";
+    private $db_name = "heroku_cfa038a59a6920c";
+    private $username = "b8e93990aa4e63";
+    private $password = "8d33f7af ";
     
     //local host crednetials
 //     private $host = "localhost";
